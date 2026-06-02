@@ -1,11 +1,13 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../Downloads/unicus/unicus_new/data"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "name": "unicus.github.io",
+      "path": ".",
+    },
+    {
+      "name": "data",
+      "path": "../Downloads/unicus/unicus_new/data",
+    },
+  ],
+  "settings": {},
 }

@@ -62,13 +62,18 @@
         width: 7px;
         height: 7px;
         background: var(--pu);
-        transition: transform 0.15s var(--ease), background 0.3s;
+        transition:
+          transform 0.15s var(--ease),
+          background 0.3s;
       }
       #cur-ring {
         width: 36px;
         height: 36px;
         border: 1.5px solid rgba(102, 56, 182, 0.45);
-        transition: width 0.4s var(--ease), height 0.4s var(--ease), border-color 0.4s;
+        transition:
+          width 0.4s var(--ease),
+          height 0.4s var(--ease),
+          border-color 0.4s;
       }
       body.hov #cur-dot {
         transform: translate(-50%, -50%) scale(2.2);
@@ -124,7 +129,11 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgba(70, 38, 130, 0.6) 0%, rgba(102, 56, 182, 0.3) 100%);
+        background: linear-gradient(
+          135deg,
+          rgba(70, 38, 130, 0.6) 0%,
+          rgba(102, 56, 182, 0.3) 100%
+        );
       }
       .contact-hero-inner {
         position: relative;
@@ -216,7 +225,9 @@
         border: 1.5px solid var(--bdr);
         border-radius: 4px;
         outline: none;
-        transition: border-color 0.3s, box-shadow 0.3s;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
         appearance: none;
       }
       .form-input:focus,
@@ -315,7 +326,9 @@
         position: relative;
         overflow: hidden;
         box-shadow: 0 4px 20px rgba(102, 56, 182, 0.35);
-        transition: box-shadow 0.3s, transform 0.3s var(--ease);
+        transition:
+          box-shadow 0.3s,
+          transform 0.3s var(--ease);
       }
       .btn-submit::before {
         content: "";
@@ -436,11 +449,18 @@
         text-underline-offset: 3px;
         transition: color 0.3s;
       }
-      .co-info-row dd a:hover { color: var(--pu-lt); }
+      .co-info-row dd a:hover {
+        color: var(--pu-lt);
+      }
 
       @media (max-width: 560px) {
-        .co-info-inner { grid-template-columns: 1fr; gap: 28px; }
-        .co-info-row { grid-template-columns: 80px 1fr; }
+        .co-info-inner {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        .co-info-row {
+          grid-template-columns: 80px 1fr;
+        }
       }
 
       /* FOOTER */
@@ -483,14 +503,14 @@
 
     <!-- NAV -->
     <nav>
-      <a href="index.html" class="hov">
+      <a href="./index.html" class="hov">
         <img
           class="nav-logo"
           src="https://static.wixstatic.com/media/4f5c6c_6afe4ffd06754d9382004c0c904a6c5c~mv2.png"
           alt="Unicus & Co."
         />
       </a>
-      <a href="index.html" class="nav-back hov">← サイトトップへ戻る</a>
+      <a href="./index.html" class="nav-back hov">← サイトトップへ戻る</a>
     </nav>
 
     <!-- HERO -->
@@ -510,19 +530,32 @@
     <div class="contact-wrap">
       <div class="form-block" id="formBlock">
         <form id="contactForm" novalidate>
-
           <div class="form-2col">
             <div class="form-row">
               <label class="form-label" for="lastName">
                 お名前（姓）<span class="form-required">必須</span>
               </label>
-              <input class="form-input hov" type="text" id="lastName" name="lastName" placeholder="山田" required />
+              <input
+                class="form-input hov"
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="山田"
+                required
+              />
             </div>
             <div class="form-row">
               <label class="form-label" for="firstName">
                 お名前（名）<span class="form-required">必須</span>
               </label>
-              <input class="form-input hov" type="text" id="firstName" name="firstName" placeholder="太郎" required />
+              <input
+                class="form-input hov"
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="太郎"
+                required
+              />
             </div>
           </div>
 
@@ -530,14 +563,27 @@
             <label class="form-label" for="company">
               会社名<span class="form-required">必須</span>
             </label>
-            <input class="form-input hov" type="text" id="company" name="company" placeholder="株式会社〇〇" required />
+            <input
+              class="form-input hov"
+              type="text"
+              id="company"
+              name="company"
+              placeholder="株式会社〇〇"
+              required
+            />
           </div>
 
           <div class="form-row">
             <label class="form-label" for="dept">
               部署・役職<span class="form-optional">任意</span>
             </label>
-            <input class="form-input hov" type="text" id="dept" name="dept" placeholder="人事部 採用担当" />
+            <input
+              class="form-input hov"
+              type="text"
+              id="dept"
+              name="dept"
+              placeholder="人事部 採用担当"
+            />
           </div>
 
           <div class="form-2col">
@@ -545,13 +591,26 @@
               <label class="form-label" for="email">
                 メールアドレス<span class="form-required">必須</span>
               </label>
-              <input class="form-input hov" type="email" id="email" name="email" placeholder="example@company.com" required />
+              <input
+                class="form-input hov"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@company.com"
+                required
+              />
             </div>
             <div class="form-row">
               <label class="form-label" for="phone">
                 電話番号<span class="form-optional">任意</span>
               </label>
-              <input class="form-input hov" type="tel" id="phone" name="phone" placeholder="03-0000-0000" />
+              <input
+                class="form-input hov"
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="03-0000-0000"
+              />
             </div>
           </div>
 
@@ -560,8 +619,15 @@
               採用ご希望ポジション<span class="form-required">必須</span>
             </label>
             <div class="form-select-wrap">
-              <select class="form-select hov" id="position" name="position" required>
-                <option value="" disabled selected>ポジションを選択してください</option>
+              <select
+                class="form-select hov"
+                id="position"
+                name="position"
+                required
+              >
+                <option value="" disabled selected>
+                  ポジションを選択してください
+                </option>
                 <option value="cmo">CMO（最高マーケティング責任者）</option>
                 <option value="cdo">CDO（最高デジタル責任者）</option>
                 <option value="vp">VP of Marketing</option>
@@ -608,7 +674,9 @@
           <label class="privacy-check">
             <input type="checkbox" id="privacy" name="privacy" required />
             <span class="privacy-check-text">
-              <a href="https://www.unicus-co.com/" target="_blank">プライバシーポリシー</a>に同意の上、送信します。
+              <a href="https://www.unicus-co.com/" target="_blank"
+                >プライバシーポリシー</a
+              >に同意の上、送信します。
             </span>
           </label>
 
@@ -616,7 +684,6 @@
             <span>送信する</span>
             <span>→</span>
           </button>
-
         </form>
 
         <!-- Thanks message -->
@@ -645,7 +712,9 @@
             alt="Unicus & Co."
             class="co-info-logo"
           />
-          <p class="co-info-catch">マーケターと共に<br />世界の未来を変える。</p>
+          <p class="co-info-catch">
+            マーケターと共に<br />世界の未来を変える。
+          </p>
         </div>
         <dl class="co-info-table">
           <div class="co-info-row">
@@ -658,7 +727,11 @@
           </div>
           <div class="co-info-row">
             <dt>メール</dt>
-            <dd><a href="mailto:ryohei@unicus-co.com" class="hov">ryohei@unicus-co.com</a></dd>
+            <dd>
+              <a href="mailto:ryohei@unicus-co.com" class="hov"
+                >ryohei@unicus-co.com</a
+              >
+            </dd>
           </div>
           <div class="co-info-row">
             <dt>許認可</dt>
@@ -683,20 +756,33 @@
         /* Cursor */
         const dot = document.getElementById("cur-dot");
         const ring = document.getElementById("cur-ring");
-        let mx = 0, my = 0, rx = 0, ry = 0;
+        let mx = 0,
+          my = 0,
+          rx = 0,
+          ry = 0;
         document.addEventListener("mousemove", (e) => {
-          mx = e.clientX; my = e.clientY;
-          dot.style.left = mx + "px"; dot.style.top = my + "px";
+          mx = e.clientX;
+          my = e.clientY;
+          dot.style.left = mx + "px";
+          dot.style.top = my + "px";
         });
         (function loop() {
-          rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
-          ring.style.left = rx + "px"; ring.style.top = ry + "px";
+          rx += (mx - rx) * 0.1;
+          ry += (my - ry) * 0.1;
+          ring.style.left = rx + "px";
+          ring.style.top = ry + "px";
           requestAnimationFrame(loop);
         })();
-        document.querySelectorAll(".hov, a, button, input, select, textarea").forEach((el) => {
-          el.addEventListener("mouseenter", () => document.body.classList.add("hov"));
-          el.addEventListener("mouseleave", () => document.body.classList.remove("hov"));
-        });
+        document
+          .querySelectorAll(".hov, a, button, input, select, textarea")
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () =>
+              document.body.classList.add("hov"),
+            );
+            el.addEventListener("mouseleave", () =>
+              document.body.classList.remove("hov"),
+            );
+          });
 
         /* Form submit */
         const form = document.getElementById("contactForm");
