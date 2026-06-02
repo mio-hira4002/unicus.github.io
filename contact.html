@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>採用相談のお問い合わせ — 株式会社 Unicus &amp; Co.</title>
+
+    <style>
+      :root {
+        --pu: rgb(102, 56, 182);
+        --pu-lt: rgb(139, 94, 212);
+        --pu-dk: rgb(70, 38, 130);
+        --pu-pale: rgba(102, 56, 182, 0.07);
+        --bg: #f6f5fb;
+        --bg-dark: rgb(47, 48, 58);
+        --bg-mid: rgb(36, 37, 46);
+        --text: #111018;
+        --text-inv: #f4f2fb;
+        --muted: #6e6a80;
+        --mut-inv: rgba(244, 242, 251, 0.48);
+        --bdr: rgba(102, 56, 182, 0.14);
+        --bdr-inv: rgba(244, 242, 251, 0.12);
+        --nav-h: 68px;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+        cursor: none;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+      }
+
+      /* CURSOR */
+      #cur-dot,
+      #cur-ring {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #cur-dot {
+        width: 7px;
+        height: 7px;
+        background: var(--pu);
+        transition: transform 0.15s var(--ease), background 0.3s;
+      }
+      #cur-ring {
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid rgba(102, 56, 182, 0.45);
+        transition: width 0.4s var(--ease), height 0.4s var(--ease), border-color 0.4s;
+      }
+      body.hov #cur-dot {
+        transform: translate(-50%, -50%) scale(2.2);
+        background: var(--pu-lt);
+      }
+      body.hov #cur-ring {
+        width: 60px;
+        height: 60px;
+        border-color: var(--pu);
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--nav-h);
+        z-index: 800;
+        display: flex;
+        align-items: center;
+        padding: 0 clamp(20px, 5vw, 64px);
+        background: rgba(246, 245, 251, 0.94);
+        backdrop-filter: blur(20px) saturate(160%);
+        box-shadow: 0 1px 0 var(--bdr);
+      }
+      .nav-logo {
+        height: 26px;
+        width: auto;
+        display: block;
+      }
+      .nav-back {
+        margin-left: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--muted);
+        transition: color 0.3s;
+      }
+      .nav-back:hover {
+        color: var(--pu);
+      }
+
+      /* HERO BAND */
+      .contact-hero {
+        background: var(--bg-dark);
+        padding: calc(var(--nav-h) + 72px) clamp(24px, 6vw, 100px) 72px;
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(70, 38, 130, 0.6) 0%, rgba(102, 56, 182, 0.3) 100%);
+      }
+      .contact-hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 10px;
+        letter-spacing: 0.24em;
+        color: var(--pu-lt);
+        margin-bottom: 20px;
+      }
+      .hero-tag::before {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--pu-lt);
+      }
+      .contact-hero h1 {
+        font-size: clamp(28px, 5vw, 54px);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.3;
+        margin-bottom: 20px;
+      }
+      .contact-hero h1 .acc {
+        color: var(--pu-lt);
+      }
+      .contact-hero p {
+        font-size: 14px;
+        line-height: 2;
+        color: rgba(244, 242, 251, 0.6);
+      }
+
+      /* FORM SECTION */
+      .contact-wrap {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: clamp(56px, 8vw, 100px) clamp(24px, 5vw, 72px);
+      }
+
+      .form-block {
+        background: #fff;
+        border: 1px solid var(--bdr);
+        border-radius: 6px;
+        padding: clamp(36px, 5vw, 60px);
+        box-shadow: 0 4px 32px rgba(102, 56, 182, 0.06);
+      }
+
+      .form-row {
+        margin-bottom: 28px;
+      }
+      .form-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+      .form-required {
+        font-size: 10px;
+        color: #fff;
+        background: var(--pu);
+        padding: 2px 7px;
+        border-radius: 2px;
+        letter-spacing: 0.04em;
+      }
+      .form-optional {
+        font-size: 10px;
+        color: var(--muted);
+        border: 1px solid var(--bdr);
+        padding: 2px 7px;
+        border-radius: 2px;
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 13px 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        color: var(--text);
+        background: var(--bg);
+        border: 1.5px solid var(--bdr);
+        border-radius: 4px;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        appearance: none;
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        border-color: var(--pu);
+        box-shadow: 0 0 0 3px rgba(102, 56, 182, 0.1);
+        background: #fff;
+      }
+      .form-input::placeholder,
+      .form-textarea::placeholder {
+        color: rgba(110, 106, 128, 0.5);
+      }
+      .form-textarea {
+        min-height: 160px;
+        resize: vertical;
+        line-height: 1.8;
+      }
+      .form-select-wrap {
+        position: relative;
+      }
+      .form-select-wrap::after {
+        content: "▾";
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        pointer-events: none;
+        font-size: 13px;
+      }
+      .form-select {
+        cursor: pointer;
+      }
+
+      .form-2col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .form-note {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.9;
+        margin-top: 6px;
+      }
+
+      .form-divider {
+        border: none;
+        border-top: 1px solid var(--bdr);
+        margin: 32px 0;
+      }
+
+      .privacy-check {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 32px;
+        cursor: pointer;
+      }
+      .privacy-check input[type="checkbox"] {
+        margin-top: 3px;
+        width: 16px;
+        height: 16px;
+        accent-color: var(--pu);
+        flex-shrink: 0;
+        cursor: pointer;
+      }
+      .privacy-check-text {
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--muted);
+      }
+      .privacy-check-text a {
+        color: var(--pu);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .btn-submit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 17px 32px;
+        background: var(--pu);
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(102, 56, 182, 0.35);
+        transition: box-shadow 0.3s, transform 0.3s var(--ease);
+      }
+      .btn-submit::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--pu-lt);
+        transform: translateX(-101%);
+        transition: transform 0.5s var(--ease);
+      }
+      .btn-submit:hover::before {
+        transform: translateX(0);
+      }
+      .btn-submit:hover {
+        box-shadow: 0 8px 30px rgba(102, 56, 182, 0.5);
+        transform: translateY(-2px);
+      }
+      .btn-submit > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* THANKS STATE */
+      .thanks-msg {
+        display: none;
+        text-align: center;
+        padding: 56px 32px;
+      }
+      .thanks-msg.show {
+        display: block;
+      }
+      .thanks-icon {
+        width: 64px;
+        height: 64px;
+        background: var(--pu-pale);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+      }
+      .thanks-icon svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--pu);
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .thanks-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 14px;
+      }
+      .thanks-body {
+        font-size: 14px;
+        line-height: 2;
+        color: var(--muted);
+      }
+
+      /* COMPANY INFO */
+      .co-info-wrap {
+        background: var(--bg);
+        border-top: 1px solid var(--bdr);
+        padding: 52px clamp(24px, 5vw, 72px);
+        max-width: 780px;
+        margin: 0 auto;
+      }
+      .co-info-inner {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+      .co-info-logo {
+        height: 22px;
+        width: auto;
+        margin-bottom: 14px;
+        opacity: 0.85;
+      }
+      .co-info-catch {
+        font-size: 12px;
+        line-height: 1.9;
+        color: var(--muted);
+      }
+      .co-info-table {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .co-info-row {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 16px;
+        font-size: 13px;
+        border-bottom: 1px solid var(--bdr);
+        padding-bottom: 14px;
+      }
+      .co-info-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .co-info-row dt {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--pu);
+        letter-spacing: 0.04em;
+        padding-top: 2px;
+      }
+      .co-info-row dd {
+        color: var(--text);
+        line-height: 1.7;
+      }
+      .co-info-row dd a {
+        color: var(--pu);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.3s;
+      }
+      .co-info-row dd a:hover { color: var(--pu-lt); }
+
+      @media (max-width: 560px) {
+        .co-info-inner { grid-template-columns: 1fr; gap: 28px; }
+        .co-info-row { grid-template-columns: 80px 1fr; }
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--bg-dark);
+        padding: 36px 0;
+        text-align: center;
+      }
+      .foot-logo {
+        height: 20px;
+        width: auto;
+        margin: 0 auto 12px;
+        opacity: 0.7;
+      }
+      .foot-copy {
+        font-size: 11px;
+        color: rgba(244, 242, 251, 0.2);
+        letter-spacing: 0.06em;
+      }
+
+      @media (max-width: 640px) {
+        .form-2col {
+          grid-template-columns: 1fr;
+        }
+        .info-item {
+          border-right: none;
+          border-bottom: 1px solid var(--bdr-inv);
+          padding: 20px 0;
+        }
+        .info-item:last-child {
+          border-bottom: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cursor -->
+    <div id="cur-dot"></div>
+    <div id="cur-ring"></div>
+
+    <!-- NAV -->
+    <nav>
+      <a href="unicus_new_hp.html" class="hov">
+        <img
+          class="nav-logo"
+          src="https://static.wixstatic.com/media/4f5c6c_6afe4ffd06754d9382004c0c904a6c5c~mv2.png"
+          alt="Unicus & Co."
+        />
+      </a>
+      <a href="unicus_new_hp.html" class="nav-back hov">← サイトトップへ戻る</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="contact-hero">
+      <div class="contact-hero-inner">
+        <div class="hero-tag">採用相談</div>
+        <h1>採用のご相談、<br /><span class="acc">お気軽にどうぞ。</span></h1>
+        <p>
+          マーケターの採用でお悩みの企業担当者様へ。<br />
+          まずは現状の課題やご要望をお聞かせください。<br />
+          専任のコンサルタントが丁寧にヒアリングいたします。
+        </p>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="contact-wrap">
+      <div class="form-block" id="formBlock">
+        <form id="contactForm" novalidate>
+
+          <div class="form-2col">
+            <div class="form-row">
+              <label class="form-label" for="lastName">
+                お名前（姓）<span class="form-required">必須</span>
+              </label>
+              <input class="form-input hov" type="text" id="lastName" name="lastName" placeholder="山田" required />
+            </div>
+            <div class="form-row">
+              <label class="form-label" for="firstName">
+                お名前（名）<span class="form-required">必須</span>
+              </label>
+              <input class="form-input hov" type="text" id="firstName" name="firstName" placeholder="太郎" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="company">
+              会社名<span class="form-required">必須</span>
+            </label>
+            <input class="form-input hov" type="text" id="company" name="company" placeholder="株式会社〇〇" required />
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="dept">
+              部署・役職<span class="form-optional">任意</span>
+            </label>
+            <input class="form-input hov" type="text" id="dept" name="dept" placeholder="人事部 採用担当" />
+          </div>
+
+          <div class="form-2col">
+            <div class="form-row">
+              <label class="form-label" for="email">
+                メールアドレス<span class="form-required">必須</span>
+              </label>
+              <input class="form-input hov" type="email" id="email" name="email" placeholder="example@company.com" required />
+            </div>
+            <div class="form-row">
+              <label class="form-label" for="phone">
+                電話番号<span class="form-optional">任意</span>
+              </label>
+              <input class="form-input hov" type="tel" id="phone" name="phone" placeholder="03-0000-0000" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="position">
+              採用ご希望ポジション<span class="form-required">必須</span>
+            </label>
+            <div class="form-select-wrap">
+              <select class="form-select hov" id="position" name="position" required>
+                <option value="" disabled selected>ポジションを選択してください</option>
+                <option value="cmo">CMO（最高マーケティング責任者）</option>
+                <option value="cdo">CDO（最高デジタル責任者）</option>
+                <option value="vp">VP of Marketing</option>
+                <option value="director">マーケティング部長</option>
+                <option value="manager">マーケティングマネージャー</option>
+                <option value="senior">シニアスペシャリスト</option>
+                <option value="growth">グロースリード</option>
+                <option value="other">その他・複数ポジション</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="timing">
+              採用希望時期<span class="form-optional">任意</span>
+            </label>
+            <div class="form-select-wrap">
+              <select class="form-select hov" id="timing" name="timing">
+                <option value="" disabled selected>選択してください</option>
+                <option value="asap">できるだけ早く（1〜2ヶ月以内）</option>
+                <option value="3m">3ヶ月以内</option>
+                <option value="6m">半年以内</option>
+                <option value="1y">1年以内</option>
+                <option value="undecided">未定・検討中</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="message">
+              お問い合わせ内容<span class="form-required">必須</span>
+            </label>
+            <textarea
+              class="form-textarea hov"
+              id="message"
+              name="message"
+              placeholder="採用背景・現状の課題・求める人物像など、お気軽にご記入ください。"
+              required
+            ></textarea>
+          </div>
+
+          <hr class="form-divider" />
+
+          <label class="privacy-check">
+            <input type="checkbox" id="privacy" name="privacy" required />
+            <span class="privacy-check-text">
+              <a href="https://www.unicus-co.com/" target="_blank">プライバシーポリシー</a>に同意の上、送信します。
+            </span>
+          </label>
+
+          <button type="submit" class="btn-submit hov">
+            <span>送信する</span>
+            <span>→</span>
+          </button>
+
+        </form>
+
+        <!-- Thanks message -->
+        <div class="thanks-msg" id="thankMsg">
+          <div class="thanks-icon">
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div class="thanks-title">お問い合わせを受け付けました</div>
+          <p class="thanks-body">
+            ご連絡いただきありがとうございます。<br />
+            担当コンサルタントより、2営業日以内にご連絡いたします。<br />
+            しばらくお待ちください。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPANY INFO -->
+    <div class="co-info-wrap">
+      <div class="co-info-inner">
+        <div class="co-info-logo-col">
+          <img
+            src="https://static.wixstatic.com/media/4f5c6c_6afe4ffd06754d9382004c0c904a6c5c~mv2.png"
+            alt="Unicus & Co."
+            class="co-info-logo"
+          />
+          <p class="co-info-catch">マーケターと共に<br />世界の未来を変える。</p>
+        </div>
+        <dl class="co-info-table">
+          <div class="co-info-row">
+            <dt>会社名</dt>
+            <dd>株式会社 Unicus &amp; Co.（ウニクス・アンド・カンパニー）</dd>
+          </div>
+          <div class="co-info-row">
+            <dt>所在地</dt>
+            <dd>〒160-0022 東京都新宿区新宿一丁目9番10号 YKB東ビル 4階</dd>
+          </div>
+          <div class="co-info-row">
+            <dt>メール</dt>
+            <dd><a href="mailto:ryohei@unicus-co.com" class="hov">ryohei@unicus-co.com</a></dd>
+          </div>
+          <div class="co-info-row">
+            <dt>許認可</dt>
+            <dd>有料職業紹介事業許可番号：13-ユ-318707</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <img
+        class="foot-logo"
+        src="https://static.wixstatic.com/media/4f5c6c_7aca9c44feca41eda9ca5cbb7363a597~mv2.png"
+        alt="Unicus & Co."
+      />
+      <div class="foot-copy">© 2024 Unicus &amp; Co. All rights reserved.</div>
+    </footer>
+
+    <script>
+      (() => {
+        /* Cursor */
+        const dot = document.getElementById("cur-dot");
+        const ring = document.getElementById("cur-ring");
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX; my = e.clientY;
+          dot.style.left = mx + "px"; dot.style.top = my + "px";
+        });
+        (function loop() {
+          rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+          ring.style.left = rx + "px"; ring.style.top = ry + "px";
+          requestAnimationFrame(loop);
+        })();
+        document.querySelectorAll(".hov, a, button, input, select, textarea").forEach((el) => {
+          el.addEventListener("mouseenter", () => document.body.classList.add("hov"));
+          el.addEventListener("mouseleave", () => document.body.classList.remove("hov"));
+        });
+
+        /* Form submit */
+        const form = document.getElementById("contactForm");
+        const thankMsg = document.getElementById("thankMsg");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          /* Hide form, show thanks */
+          form.style.display = "none";
+          thankMsg.classList.add("show");
+        });
+      })();
+    </script>
+  </body>
+</html>
