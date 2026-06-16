@@ -78,11 +78,33 @@
         background: var(--bg);
       }
 
-      /* dot-grid texture */
+      /* building bg photo */
+      .hero-bg {
+        position: absolute; inset: 0;
+        background-image: url("data/building2.jpg");
+        background-size: cover;
+        background-position: center;
+        transform: scale(1.06);
+        animation: heroBgIn 1.4s var(--ease) 1.8s forwards;
+      }
+      @keyframes heroBgIn { to { transform: scale(1); } }
+
+      /* dark gradient overlay */
+      .hero-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(6, 6, 12, 0.88) 0%,
+          rgba(14, 10, 28, 0.74) 55%,
+          rgba(36, 20, 70, 0.52) 100%
+        );
+      }
+
+      /* dot-grid texture — white dots on dark bg */
       .hero::before {
         content: "";
         position: absolute; inset: 0;
-        background-image: radial-gradient(circle, rgba(102,56,182,.09) 1px, transparent 1px);
+        background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
         background-size: 30px 30px;
       }
 
@@ -117,18 +139,18 @@
 
       .hero-tag {
         display: inline-flex; align-items: center; gap: 12px;
-        font-size: 10px; letter-spacing: .3em; color: var(--pu); font-weight: 700;
+        font-size: 10px; letter-spacing: .3em; color: var(--pu-lt); font-weight: 700;
         margin-bottom: 28px;
         opacity: 0; transform: translateY(16px);
         animation: fadeUp .8s var(--ease) .2s forwards;
       }
-      .hero-tag::before { content: ""; width: 28px; height: 1px; background: var(--pu); }
+      .hero-tag::before { content: ""; width: 28px; height: 1px; background: var(--pu-lt); }
 
       /* word-by-word slide-up */
       .hero-h1 {
         font-size: clamp(38px, 6.5vw, 72px);
         font-weight: 700; line-height: 1.2;
-        color: var(--text); margin-bottom: 28px;
+        color: #fff; margin-bottom: 28px;
       }
       .word-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; }
       .word-inner {
@@ -142,7 +164,7 @@
       @keyframes wordUp { to { opacity: 1; transform: translateY(0); } }
 
       .acc-line {
-        display: inline-block; color: var(--pu); position: relative;
+        display: inline-block; color: var(--pu-lt); position: relative;
       }
       .acc-line::after {
         content: "";
@@ -155,7 +177,7 @@
       @keyframes drawLine { to { width: 100%; } }
 
       .hero-sub {
-        font-size: 15px; line-height: 2.1; color: var(--text-2);
+        font-size: 15px; line-height: 2.1; color: rgba(244,242,251,.65);
         opacity: 0; transform: translateY(16px);
         animation: fadeUp .9s var(--ease) .85s forwards;
       }
@@ -166,7 +188,7 @@
         z-index: 1; display: flex; align-items: center; gap: 14px;
         opacity: 0; animation: fadeUp .8s var(--ease) 1.3s forwards;
       }
-      .hero-scroll span { font-size: 9px; letter-spacing: .22em; color: var(--muted); }
+      .hero-scroll span { font-size: 9px; letter-spacing: .22em; color: rgba(244,242,251,.38); }
       .scroll-track {
         width: 40px; height: 1px; background: var(--bdr); position: relative; overflow: hidden;
       }
@@ -400,6 +422,8 @@
 
     <!-- HERO -->
     <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
       <div class="hero-orb"></div>
       <div class="hero-ring r1"></div>
       <div class="hero-ring r2"></div>
