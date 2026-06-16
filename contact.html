@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>採用相談のお問い合わせ — 株式会社 Unicus &amp; Co.</title>
-    <script src="https://js-na2.hsforms.net/forms/embed/246390023.js" defer></script>
-
+    <title>お問い合わせ — 株式会社 Unicus &amp; Co.</title>
     <style>
       :root {
         --pu: rgb(102, 56, 182);
@@ -18,41 +16,26 @@
         --text: #111018;
         --text-inv: #f4f2fb;
         --muted: #6e6a80;
-        --mut-inv: rgba(244, 242, 251, 0.48);
         --bdr: rgba(102, 56, 182, 0.14);
         --bdr-inv: rgba(244, 242, 251, 0.12);
         --nav-h: 68px;
         --ease: cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
       body {
         font-family: Arial, Helvetica, sans-serif;
-        background: var(--bg);
+        background: var(--bg-dark);
         color: var(--text);
         overflow-x: hidden;
         cursor: none;
       }
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      img {
-        display: block;
-      }
+      a { color: inherit; text-decoration: none; }
+      img { display: block; }
 
       /* CURSOR */
-      #cur-dot,
-      #cur-ring {
+      #cur-dot, #cur-ring {
         position: fixed;
         pointer-events: none;
         z-index: 9998;
@@ -60,529 +43,389 @@
         transform: translate(-50%, -50%);
       }
       #cur-dot {
-        width: 7px;
-        height: 7px;
+        width: 7px; height: 7px;
         background: var(--pu);
-        transition:
-          transform 0.15s var(--ease),
-          background 0.3s;
+        transition: transform 0.15s var(--ease), background 0.3s;
       }
       #cur-ring {
-        width: 36px;
-        height: 36px;
+        width: 36px; height: 36px;
         border: 1.5px solid rgba(102, 56, 182, 0.45);
-        transition:
-          width 0.4s var(--ease),
-          height 0.4s var(--ease),
-          border-color 0.4s;
+        transition: width 0.4s var(--ease), height 0.4s var(--ease), border-color 0.4s;
       }
-      body.hov #cur-dot {
-        transform: translate(-50%, -50%) scale(2.2);
-        background: var(--pu-lt);
-      }
-      body.hov #cur-ring {
-        width: 60px;
-        height: 60px;
-        border-color: var(--pu);
-      }
+      body.hov #cur-dot { transform: translate(-50%, -50%) scale(2.2); background: var(--pu-lt); }
+      body.hov #cur-ring { width: 60px; height: 60px; border-color: var(--pu); }
 
       /* NAV */
       nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: var(--nav-h);
-        z-index: 800;
-        display: flex;
-        align-items: center;
+        position: fixed; top: 0; left: 0; right: 0;
+        height: var(--nav-h); z-index: 800;
+        display: flex; align-items: center;
         padding: 0 clamp(20px, 5vw, 64px);
-        background: rgba(246, 245, 251, 0.94);
+        background: rgba(47, 48, 58, 0.92);
         backdrop-filter: blur(20px) saturate(160%);
-        box-shadow: 0 1px 0 var(--bdr);
+        box-shadow: 0 1px 0 var(--bdr-inv);
       }
-      .nav-logo {
-        height: 26px;
-        width: auto;
-        display: block;
-      }
+      .nav-logo { height: 26px; width: auto; }
       .nav-back {
         margin-left: auto;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        color: var(--muted);
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 13px; color: rgba(244,242,251,0.5);
         transition: color 0.3s;
       }
-      .nav-back:hover {
-        color: var(--pu);
+      .nav-back:hover { color: var(--pu-lt); }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: flex; flex-direction: column; justify-content: center;
+        padding: calc(var(--nav-h) + 60px) clamp(24px, 8vw, 120px) 80px;
+        position: relative; overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute; inset: 0; z-index: 0;
+        background: radial-gradient(ellipse 80% 60% at 60% 40%,
+          rgba(102,56,182,0.25) 0%, transparent 70%),
+          radial-gradient(ellipse 50% 50% at 20% 80%,
+          rgba(70,38,130,0.3) 0%, transparent 60%);
+      }
+      /* animated floating orbs */
+      .orb {
+        position: absolute; border-radius: 50%;
+        filter: blur(80px); opacity: 0.18; z-index: 0;
+        animation: drift 12s ease-in-out infinite alternate;
+      }
+      .orb1 { width: 500px; height: 500px; background: var(--pu); top: -100px; right: 10%; animation-duration: 14s; }
+      .orb2 { width: 300px; height: 300px; background: var(--pu-lt); bottom: 5%; left: 5%; animation-duration: 10s; animation-delay: -4s; }
+      .orb3 { width: 200px; height: 200px; background: var(--pu-dk); top: 40%; left: 40%; animation-duration: 16s; animation-delay: -8s; }
+      @keyframes drift {
+        from { transform: translate(0, 0) scale(1); }
+        to   { transform: translate(30px, -40px) scale(1.1); }
       }
 
-      /* HERO BAND */
-      .contact-hero {
-        background: var(--bg-dark);
-        padding: calc(var(--nav-h) + 72px) clamp(24px, 6vw, 100px) 72px;
-        position: relative;
-        overflow: hidden;
-      }
-      .contact-hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(70, 38, 130, 0.6) 0%,
-          rgba(102, 56, 182, 0.3) 100%
-        );
-      }
-      .contact-hero-inner {
-        position: relative;
-        z-index: 1;
-        max-width: 700px;
-      }
+      .hero-inner { position: relative; z-index: 1; max-width: 680px; }
       .hero-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 10px;
-        letter-spacing: 0.24em;
-        color: var(--pu-lt);
-        margin-bottom: 20px;
+        display: inline-flex; align-items: center; gap: 10px;
+        font-size: 10px; letter-spacing: 0.28em; color: var(--pu-lt);
+        margin-bottom: 24px;
+        opacity: 0; transform: translateY(20px);
+        animation: fadeUp 0.8s var(--ease) 0.2s forwards;
       }
-      .hero-tag::before {
-        content: "";
-        width: 22px;
-        height: 1px;
-        background: var(--pu-lt);
+      .hero-tag::before { content: ""; width: 28px; height: 1px; background: var(--pu-lt); }
+      .hero h1 {
+        font-size: clamp(32px, 6vw, 64px);
+        font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 24px;
+        opacity: 0; transform: translateY(24px);
+        animation: fadeUp 0.9s var(--ease) 0.35s forwards;
       }
-      .contact-hero h1 {
-        font-size: clamp(28px, 5vw, 54px);
-        font-weight: 700;
-        color: #fff;
-        line-height: 1.3;
-        margin-bottom: 20px;
+      .hero h1 .acc { color: var(--pu-lt); }
+      .hero-sub {
+        font-size: 15px; line-height: 2; color: rgba(244,242,251,0.55);
+        opacity: 0; transform: translateY(20px);
+        animation: fadeUp 0.9s var(--ease) 0.5s forwards;
       }
-      .contact-hero h1 .acc {
-        color: var(--pu-lt);
+      .hero-scroll {
+        position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+        z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+        opacity: 0; animation: fadeUp 1s var(--ease) 1.2s forwards;
       }
-      .contact-hero p {
-        font-size: 14px;
-        line-height: 2;
-        color: rgba(244, 242, 251, 0.6);
+      .hero-scroll span { font-size: 9px; letter-spacing: 0.2em; color: rgba(244,242,251,0.3); }
+      .scroll-line {
+        width: 1px; height: 48px; background: linear-gradient(to bottom, transparent, rgba(139,94,212,0.6));
+        animation: scrollPulse 2s ease-in-out infinite;
       }
-
-      /* FORM SECTION */
-      .contact-wrap {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: clamp(56px, 8vw, 100px) clamp(16px, 2vw, 24px);
+      @keyframes scrollPulse {
+        0%,100% { opacity: 0.3; transform: scaleY(1); }
+        50% { opacity: 1; transform: scaleY(1.3); }
       }
-
-      .form-block {
-        background: #fff;
-        border: 1px solid var(--bdr);
-        border-radius: 6px;
-        padding: clamp(36px, 5vw, 60px);
-        box-shadow: 0 4px 32px rgba(102, 56, 182, 0.06);
+      @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
       }
 
-      .form-row {
-        margin-bottom: 28px;
-      }
-      .form-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--text);
-        margin-bottom: 8px;
-      }
-      .form-required {
-        font-size: 10px;
-        color: #fff;
-        background: var(--pu);
-        padding: 2px 7px;
-        border-radius: 2px;
-        letter-spacing: 0.04em;
-      }
-      .form-optional {
-        font-size: 10px;
-        color: var(--muted);
-        border: 1px solid var(--bdr);
-        padding: 2px 7px;
-        border-radius: 2px;
-      }
-      .form-input,
-      .form-select,
-      .form-textarea {
-        width: 100%;
-        padding: 13px 16px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        color: var(--text);
-        background: var(--bg);
-        border: 1.5px solid var(--bdr);
-        border-radius: 4px;
-        outline: none;
-        transition:
-          border-color 0.3s,
-          box-shadow 0.3s;
-        appearance: none;
-      }
-      .form-input:focus,
-      .form-select:focus,
-      .form-textarea:focus {
-        border-color: var(--pu);
-        box-shadow: 0 0 0 3px rgba(102, 56, 182, 0.1);
-        background: #fff;
-      }
-      .form-input::placeholder,
-      .form-textarea::placeholder {
-        color: rgba(110, 106, 128, 0.5);
-      }
-      .form-textarea {
-        min-height: 160px;
-        resize: vertical;
-        line-height: 1.8;
-      }
-      .form-select-wrap {
-        position: relative;
-      }
-      .form-select-wrap::after {
-        content: "▾";
-        position: absolute;
-        right: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--muted);
-        pointer-events: none;
-        font-size: 13px;
-      }
-      .form-select {
-        cursor: pointer;
+      /* CARDS SECTION */
+      .cards-section {
+        padding: clamp(64px, 10vw, 120px) clamp(20px, 5vw, 60px);
+        display: flex; flex-direction: column; gap: 32px;
+        max-width: 1100px; margin: 0 auto;
       }
 
-      .form-2col {
+      /* reveal on scroll */
+      .reveal {
+        opacity: 0; transform: translateY(48px);
+        transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+      .reveal:nth-child(2) { transition-delay: 0.12s; }
+      .reveal:nth-child(3) { transition-delay: 0.24s; }
+
+      /* CARD */
+      .c-card {
+        position: relative; overflow: hidden;
+        border-radius: 12px;
+        padding: clamp(40px, 6vw, 72px) clamp(32px, 6vw, 72px);
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        grid-template-columns: 1fr auto;
+        align-items: center; gap: 40px;
+        transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
       }
+      .c-card:hover { transform: translateY(-4px); }
 
-      .form-note {
-        font-size: 12px;
-        color: var(--muted);
-        line-height: 1.9;
-        margin-top: 6px;
+      /* Card — light (career) */
+      .c-card.light {
+        background: #fff;
+        box-shadow: 0 8px 48px rgba(102,56,182,0.1);
+        border: 1px solid var(--bdr);
       }
+      .c-card.light:hover { box-shadow: 0 20px 60px rgba(102,56,182,0.18); }
 
-      .form-divider {
-        border: none;
-        border-top: 1px solid var(--bdr);
-        margin: 32px 0;
+      /* Card — dark */
+      .c-card.dark {
+        background: var(--bg-mid);
+        box-shadow: 0 8px 48px rgba(0,0,0,0.3);
+        border: 1px solid var(--bdr-inv);
       }
+      .c-card.dark:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.45); }
 
-      .privacy-check {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 32px;
-        cursor: pointer;
+      /* card shimmer on hover */
+      .c-card::after {
+        content: ""; position: absolute; inset: 0;
+        background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%);
+        transform: translateX(-100%);
+        transition: transform 0.7s var(--ease);
+        pointer-events: none;
       }
-      .privacy-check input[type="checkbox"] {
-        margin-top: 3px;
-        width: 16px;
-        height: 16px;
-        accent-color: var(--pu);
-        flex-shrink: 0;
-        cursor: pointer;
-      }
-      .privacy-check-text {
-        font-size: 13px;
-        line-height: 1.8;
-        color: var(--muted);
-      }
-      .privacy-check-text a {
-        color: var(--pu);
-        text-decoration: underline;
-        text-underline-offset: 2px;
-      }
+      .c-card:hover::after { transform: translateX(100%); }
 
-      .btn-submit {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-        padding: 17px 32px;
-        background: var(--pu);
-        color: #fff;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 15px;
-        font-weight: 700;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(102, 56, 182, 0.35);
-        transition:
-          box-shadow 0.3s,
-          transform 0.3s var(--ease);
+      /* card number badge */
+      .c-num {
+        position: absolute; top: 24px; right: 28px;
+        font-size: 72px; font-weight: 700; line-height: 1;
+        opacity: 0.05; letter-spacing: -4px; user-select: none;
       }
-      .btn-submit::before {
-        content: "";
-        position: absolute;
-        inset: 0;
+      .c-card.light .c-num { color: var(--pu); }
+      .c-card.dark  .c-num { color: #fff; }
+
+      .c-label {
+        font-size: 10px; letter-spacing: 0.22em; font-weight: 700;
+        margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+      }
+      .c-card.light .c-label { color: var(--pu); }
+      .c-card.dark  .c-label { color: var(--pu-lt); }
+      .c-label::before { content: ""; width: 18px; height: 1px; background: currentColor; }
+
+      .c-title {
+        font-size: clamp(20px, 3vw, 28px); font-weight: 700; line-height: 1.35; margin-bottom: 16px;
+      }
+      .c-card.light .c-title { color: var(--text); }
+      .c-card.dark  .c-title { color: #fff; }
+
+      .c-desc { font-size: 14px; line-height: 2; }
+      .c-card.light .c-desc { color: var(--muted); }
+      .c-card.dark  .c-desc { color: rgba(244,242,251,0.5); }
+
+      .c-action { flex-shrink: 0; }
+
+      /* Button — purple filled */
+      .btn-pu {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 16px 32px;
+        background: var(--pu); color: #fff;
+        font-size: 14px; font-weight: 700;
+        border-radius: 6px; white-space: nowrap;
+        position: relative; overflow: hidden;
+        box-shadow: 0 4px 24px rgba(102,56,182,0.4);
+        transition: box-shadow 0.3s, transform 0.3s var(--ease);
+      }
+      .btn-pu::before {
+        content: ""; position: absolute; inset: 0;
         background: var(--pu-lt);
         transform: translateX(-101%);
         transition: transform 0.5s var(--ease);
       }
-      .btn-submit:hover::before {
-        transform: translateX(0);
+      .btn-pu:hover { box-shadow: 0 8px 36px rgba(102,56,182,0.55); transform: translateY(-2px); }
+      .btn-pu:hover::before { transform: translateX(0); }
+      .btn-pu span { position: relative; z-index: 1; }
+
+      /* Button — outline light */
+      .btn-outline-light {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 16px 32px;
+        background: transparent;
+        color: #fff;
+        font-size: 14px; font-weight: 700;
+        border-radius: 6px; white-space: nowrap;
+        border: 1.5px solid rgba(244,242,251,0.25);
+        position: relative; overflow: hidden;
+        transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s var(--ease);
       }
-      .btn-submit:hover {
-        box-shadow: 0 8px 30px rgba(102, 56, 182, 0.5);
+      .btn-outline-light::before {
+        content: ""; position: absolute; inset: 0;
+        background: rgba(102,56,182,0.25);
+        transform: translateX(-101%);
+        transition: transform 0.5s var(--ease);
+      }
+      .btn-outline-light:hover {
+        border-color: var(--pu-lt);
+        box-shadow: 0 0 0 3px rgba(102,56,182,0.2);
         transform: translateY(-2px);
       }
-      .btn-submit > * {
-        position: relative;
-        z-index: 1;
-      }
+      .btn-outline-light:hover::before { transform: translateX(0); }
+      .btn-outline-light span { position: relative; z-index: 1; }
 
-      /* THANKS STATE */
-      .thanks-msg {
-        display: none;
-        text-align: center;
-        padding: 56px 32px;
+      /* mail tag */
+      .mail-tag {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 13px; margin-top: 16px;
+        color: rgba(244,242,251,0.35);
       }
-      .thanks-msg.show {
-        display: block;
-      }
-      .thanks-icon {
-        width: 64px;
-        height: 64px;
-        background: var(--pu-pale);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 24px;
-      }
-      .thanks-icon svg {
-        width: 28px;
-        height: 28px;
-        stroke: var(--pu);
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      .thanks-title {
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--text);
-        margin-bottom: 14px;
-      }
-      .thanks-body {
-        font-size: 14px;
-        line-height: 2;
-        color: var(--muted);
-      }
-
-      /* COMPANY INFO */
-      .co-info-wrap {
-        background: var(--bg);
-        border-top: 1px solid var(--bdr);
-        padding: 52px clamp(24px, 5vw, 72px);
-        max-width: 780px;
-        margin: 0 auto;
-      }
-      .co-info-inner {
-        display: grid;
-        grid-template-columns: 200px 1fr;
-        gap: 48px;
-        align-items: start;
-      }
-      .co-info-logo {
-        height: 22px;
-        width: auto;
-        margin-bottom: 14px;
-        opacity: 0.85;
-      }
-      .co-info-catch {
-        font-size: 12px;
-        line-height: 1.9;
-        color: var(--muted);
-      }
-      .co-info-table {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-      .co-info-row {
-        display: grid;
-        grid-template-columns: 90px 1fr;
-        gap: 16px;
-        font-size: 13px;
-        border-bottom: 1px solid var(--bdr);
-        padding-bottom: 14px;
-      }
-      .co-info-row:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
-      .co-info-row dt {
-        font-size: 11px;
-        font-weight: 700;
-        color: var(--pu);
-        letter-spacing: 0.04em;
-        padding-top: 2px;
-      }
-      .co-info-row dd {
-        color: var(--text);
-        line-height: 1.7;
-      }
-      .co-info-row dd a {
-        color: var(--pu);
+      .mail-tag a {
+        color: var(--pu-lt);
         text-decoration: underline;
         text-underline-offset: 3px;
-        transition: color 0.3s;
+        transition: color 0.2s;
       }
-      .co-info-row dd a:hover {
-        color: var(--pu-lt);
-      }
+      .mail-tag a:hover { color: #fff; }
 
-      @media (max-width: 560px) {
-        .co-info-inner {
-          grid-template-columns: 1fr;
-          gap: 28px;
-        }
-        .co-info-row {
-          grid-template-columns: 80px 1fr;
-        }
+      /* divider line between cards */
+      .card-divider {
+        width: 1px; height: 60px;
+        background: linear-gradient(to bottom, transparent, var(--bdr-inv), transparent);
+        margin: 0 auto;
+        opacity: 0; transform: scaleY(0);
+        transition: opacity 0.6s, transform 0.6s var(--ease);
       }
+      .card-divider.visible { opacity: 1; transform: scaleY(1); }
 
       /* FOOTER */
       footer {
-        background: var(--bg-dark);
-        padding: 36px 0;
-        text-align: center;
+        background: var(--bg-mid);
+        border-top: 1px solid var(--bdr-inv);
+        padding: 40px 0; text-align: center;
+        margin-top: 60px;
       }
-      .foot-logo {
-        height: 20px;
-        width: auto;
-        margin: 0 auto 12px;
-        opacity: 0.7;
-      }
-      .foot-copy {
-        font-size: 11px;
-        color: rgba(244, 242, 251, 0.2);
-        letter-spacing: 0.06em;
-      }
+      .foot-logo { height: 20px; width: auto; margin: 0 auto 12px; opacity: 0.6; }
+      .foot-copy { font-size: 11px; color: rgba(244,242,251,0.18); letter-spacing: 0.06em; }
 
-      @media (max-width: 640px) {
-        .form-2col {
-          grid-template-columns: 1fr;
-        }
-        .info-item {
-          border-right: none;
-          border-bottom: 1px solid var(--bdr-inv);
-          padding: 20px 0;
-        }
-        .info-item:last-child {
-          border-bottom: none;
-        }
+      /* RESPONSIVE */
+      @media (max-width: 760px) {
+        .c-card { grid-template-columns: 1fr; gap: 28px; }
+        .c-action { align-self: flex-start; }
+        .c-num { font-size: 48px; top: 16px; right: 20px; }
       }
     </style>
   </head>
   <body>
-    <!-- Cursor -->
     <div id="cur-dot"></div>
     <div id="cur-ring"></div>
 
     <!-- NAV -->
     <nav>
       <a href="./index.html" class="hov">
-        <img
-          class="nav-logo"
+        <img class="nav-logo"
           src="https://static.wixstatic.com/media/4f5c6c_6afe4ffd06754d9382004c0c904a6c5c~mv2.png"
-          alt="Unicus & Co."
-        />
+          alt="Unicus & Co." />
       </a>
       <a href="./index.html" class="nav-back hov">← サイトトップへ戻る</a>
     </nav>
 
     <!-- HERO -->
-    <div class="contact-hero">
-      <div class="contact-hero-inner">
-        <div class="hero-tag">採用相談</div>
-        <h1>採用のご相談、<br /><span class="acc">お気軽にどうぞ。</span></h1>
-        <p>
-          マーケターの採用でお悩みの企業担当者様へ。<br />
-          まずは現状の課題やご要望をお聞かせください。<br />
-          専任のコンサルタントが丁寧にヒアリングいたします。
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+      <div class="hero-inner">
+        <div class="hero-tag">CONTACT</div>
+        <h1>まず、<span class="acc">話しましょう。</span></h1>
+        <p class="hero-sub">
+          マーケター採用のご相談、キャリア相談、仲間募集。<br />
+          どんな入口でも、ウニクスはオープンです。
         </p>
       </div>
-    </div>
-
-    <!-- FORM -->
-    <div class="contact-wrap">
-      <div class="form-block" id="formBlock">
-        <div class="hs-form-frame" data-region="na2" data-form-id="e6bfc56a-9627-4584-9e73-403296cc427f" data-portal-id="246390023"></div>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        <span>SCROLL</span>
       </div>
+    </section>
 
-      <div class="form-block" id="formBlock2" style="margin-top: 40px;">
-        <div class="hs-form-frame" data-region="na2" data-form-id="9ebf2f11-9e8b-4c96-9592-c3e9111bd5ba" data-portal-id="246390023"></div>
-      </div>
-    </div>
+    <!-- CARDS -->
+    <div class="cards-section">
 
-    <!-- COMPANY INFO -->
-    <div class="co-info-wrap">
-      <div class="co-info-inner">
-        <div class="co-info-logo-col">
-          <img
-            src="https://static.wixstatic.com/media/4f5c6c_6afe4ffd06754d9382004c0c904a6c5c~mv2.png"
-            alt="Unicus & Co."
-            class="co-info-logo"
-          />
-          <p class="co-info-catch">
-            マーケターと共に<br />世界の未来を変える。
+      <!-- 1. キャリア相談 -->
+      <div class="c-card light reveal hov">
+        <div class="c-num">01</div>
+        <div class="c-body">
+          <div class="c-label">FOR CANDIDATES</div>
+          <h2 class="c-title">キャリア相談・転職を<br />検討中の方へ</h2>
+          <p class="c-desc">
+            CMOクラスからスペシャリストまで、貴方のスキルと希望に<br />
+            マッチした企業・職種をご紹介します。<br />
+            まずはオンラインで気軽にご相談ください。
           </p>
         </div>
-        <dl class="co-info-table">
-          <div class="co-info-row">
-            <dt>会社名</dt>
-            <dd>株式会社 Unicus &amp; Co.（ウニクス・アンド・カンパニー）</dd>
-          </div>
-          <div class="co-info-row">
-            <dt>所在地</dt>
-            <dd>〒160-0022 東京都新宿区新宿一丁目9番10号 YKB東ビル 4階</dd>
-          </div>
-          <div class="co-info-row">
-            <dt>メール</dt>
-            <dd>
-              <a href="mailto:ryohei@unicus-co.com" class="hov"
-                >ryohei@unicus-co.com</a
-              >
-            </dd>
-          </div>
-          <div class="co-info-row">
-            <dt>許認可</dt>
-            <dd>有料職業紹介事業許可番号：13-ユ-318707</dd>
-          </div>
-        </dl>
+        <div class="c-action">
+          <a href="https://timerex.net/s/ryohei_1041_79c5/63a2bca5" target="_blank" class="btn-pu hov">
+            <span>キャリア相談はこちら</span>
+            <span>→</span>
+          </a>
+        </div>
       </div>
+
+      <div class="card-divider"></div>
+
+      <!-- 2. 採用相談 -->
+      <div class="c-card dark reveal hov">
+        <div class="c-num">02</div>
+        <div class="c-body">
+          <div class="c-label">FOR COMPANIES</div>
+          <h2 class="c-title">マーケター採用を<br />検討中の企業様へ</h2>
+          <p class="c-desc">
+            採用課題やポジション要件をヒアリングし、<br />
+            最適なマーケター人材をご提案いたします。<br />
+            お気軽にメールにてご連絡ください。
+          </p>
+          <div class="mail-tag">
+            →&nbsp;<a href="mailto:ryohei@unicus-co.com" class="hov">ryohei@unicus-co.com</a>
+          </div>
+        </div>
+        <div class="c-action">
+          <a href="mailto:ryohei@unicus-co.com" class="btn-outline-light hov">
+            <span>メールで相談する</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <!-- 3. 仲間募集 -->
+      <div class="c-card dark reveal hov">
+        <div class="c-num">03</div>
+        <div class="c-body">
+          <div class="c-label">JOIN US</div>
+          <h2 class="c-title">ウニクスのメンバーとして<br />共に働いてくれる方へ</h2>
+          <p class="c-desc">
+            マーケターの可能性を解放する仲間を募集しています。<br />
+            採用ページは現在準備中。まずはメールで話しましょう。
+          </p>
+          <div class="mail-tag">
+            →&nbsp;<a href="mailto:ryohei@unicus-co.com" class="hov">ryohei@unicus-co.com</a>
+          </div>
+        </div>
+        <div class="c-action">
+          <a href="mailto:ryohei@unicus-co.com" class="btn-outline-light hov">
+            <span>メールで連絡する</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
     </div>
 
     <!-- FOOTER -->
     <footer>
-      <img
-        class="foot-logo"
+      <img class="foot-logo"
         src="https://static.wixstatic.com/media/4f5c6c_7aca9c44feca41eda9ca5cbb7363a597~mv2.png"
-        alt="Unicus & Co."
-      />
+        alt="Unicus & Co." />
       <div class="foot-copy">© 2024 Unicus &amp; Co. All rights reserved.</div>
     </footer>
 
@@ -591,34 +434,26 @@
         /* Cursor */
         const dot = document.getElementById("cur-dot");
         const ring = document.getElementById("cur-ring");
-        let mx = 0,
-          my = 0,
-          rx = 0,
-          ry = 0;
+        let mx = 0, my = 0, rx = 0, ry = 0;
         document.addEventListener("mousemove", (e) => {
-          mx = e.clientX;
-          my = e.clientY;
-          dot.style.left = mx + "px";
-          dot.style.top = my + "px";
+          mx = e.clientX; my = e.clientY;
+          dot.style.left = mx + "px"; dot.style.top = my + "px";
         });
         (function loop() {
-          rx += (mx - rx) * 0.1;
-          ry += (my - ry) * 0.1;
-          ring.style.left = rx + "px";
-          ring.style.top = ry + "px";
+          rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+          ring.style.left = rx + "px"; ring.style.top = ry + "px";
           requestAnimationFrame(loop);
         })();
-        document
-          .querySelectorAll(".hov, a, button, input, select, textarea")
-          .forEach((el) => {
-            el.addEventListener("mouseenter", () =>
-              document.body.classList.add("hov"),
-            );
-            el.addEventListener("mouseleave", () =>
-              document.body.classList.remove("hov"),
-            );
-          });
+        document.querySelectorAll(".hov, a, button").forEach((el) => {
+          el.addEventListener("mouseenter", () => document.body.classList.add("hov"));
+          el.addEventListener("mouseleave", () => document.body.classList.remove("hov"));
+        });
 
+        /* Scroll reveal */
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+        }, { threshold: 0.15 });
+        document.querySelectorAll(".reveal, .card-divider").forEach(el => observer.observe(el));
       })();
     </script>
   </body>
